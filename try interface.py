@@ -3,10 +3,9 @@ from tkinter import messagebox
 from tkinter import font
 from tkinter import ttk
 
+
 entries = Tk()
 entries.title("COVID Contact Tracing App")
-
-
 
 
 
@@ -28,32 +27,32 @@ butt5 = IntVar()
 
 # Function to add new entry
 def add_entry():
-    # def save_entry():
-    #     first_name = firstEntry.get()
-    #     last_name = lastEntry.get()
-    #     phone = numberEntry.get()
-    #     email = emailEntry.get()
-    #     address = addressEntry.get()
+    def save_entry():
+        first_name = firstEntry.get()
+        last_name = lastEntry.get()
+        phone = numberEntry.get()
+        email = emailEntry.get()
+        address = addressEntry.get()
         
 
-    #     if first_name and last_name and phone and email and address:
-    #         with open("contacts.txt", "a") as file:
-    #             file.write(f"{first_name, last_name},{phone},{date}\n")
-    #         messagebox.showinfo("Success", "Entry added successfully.")
-    #         entries.destroy()
-    #     else:
-    #         messagebox.showerror("Error", "Please fill in all the fields.")
+        if first_name and last_name and phone and email and address:
+            with open("saved infos.csv", "a") as file:
+                file.write(f"Name:{first_name}, Last Name: {last_name}, Phone Number: {phone}, Email: {email}, Address: {address}\n")
+            messagebox.showinfo("Success", "Entry added successfully.")
+            entries.destroy()
+        else:
+            messagebox.showerror("Error", "Please fill in all the fields.")
 
-    addButton.destroy()
-    searchButton.destroy()
+    add_window = Toplevel(entries)
+    add_window.title("Add New Entry")
+    add_window.geometry("1000x1000")
+    
 
 
     #USERINFO
-    userInfo = LabelFrame(entries, text="Person's Information", font=bold_font)
+    userInfo = LabelFrame(add_window, text="Person's Information", font=bold_font)
     userInfo.pack()
-    # userInfo.place(x="10", y="100", anchor="w")
-    
-    
+
 
     #NAME
     nameLabel = Label(userInfo, text="Name: ", font=bold_font)
@@ -111,16 +110,8 @@ def add_entry():
     
 
 
-
-
-
-
-
-
-
-
     ########SURVEY INFO############
-    healthInfo = LabelFrame(entries, text="Health Status", font=bold_font)
+    healthInfo = LabelFrame(add_window, text="Health Status", font=bold_font)
     healthInfo.pack()
 
     #COVID VAXX STATS
@@ -190,46 +181,43 @@ def add_entry():
 
 
 
-
-
-
     ########EMERGENCY CONTACT INFO############
-    contactInfo = LabelFrame(entries, text="Emergency Contact Information", font=bold_font)
+    contactInfo = LabelFrame(add_window, text="Emergency Contact Information", font=bold_font)
     contactInfo.pack()
 
     #NAME
-    nameLabel = Label(contactInfo, text="Name: ", font=bold_font)
-    nameLabel.grid(row=1, column=0, padx=20)
+    contactnameLabel = Label(contactInfo, text="Name: ", font=bold_font)
+    contactnameLabel.grid(row=1, column=0, padx=20)
 
-    firstEntry = Entry(contactInfo, width=60, font=size_entry)
-    firstEntry.grid(row=1, column=1, columnspan=2, padx=20)
+    contactfirstEntry = Entry(contactInfo, width=60, font=size_entry)
+    contactfirstEntry.grid(row=1, column=1, columnspan=2, padx=20)
 
     #PHONE NUMBER AND EMAIL
-    phoneNumber = Label(contactInfo, text="Phone Number: ", font=bold_font)
-    phoneNumber.grid(row=3, column=0, padx=20)
-    emailLabel = Label(contactInfo, text="Email: ", font=bold_font)
-    emailLabel.grid(row=5, column=0, padx=20)
+    contactphoneNumber = Label(contactInfo, text="Phone Number: ", font=bold_font)
+    contactphoneNumber.grid(row=3, column=0, padx=20)
+    contactemailLabel = Label(contactInfo, text="Email: ", font=bold_font)
+    contactemailLabel.grid(row=5, column=0, padx=20)
 
 
-    numberEntry = Entry(contactInfo, width=60, font=size_entry)
-    numberEntry.grid(row=3, column=1, columnspan=2, padx=20)
-    emailEntry = Entry(contactInfo, width=60, font=size_entry)
-    emailEntry.grid(row=5, column=1, columnspan= 2, padx=20)
+    contactnumberEntry = Entry(contactInfo, width=60, font=size_entry)
+    contactnumberEntry.grid(row=3, column=1, columnspan=2, padx=20)
+    contactemailEntry = Entry(contactInfo, width=60, font=size_entry)
+    contactemailEntry.grid(row=5, column=1, columnspan= 2, padx=20)
 
 
     #ADDRESS
-    addressLabel = Label(contactInfo, text="Address: ", font=bold_font)
-    addressLabel.grid(row=7, column=0, padx=20)
+    contactaddressLabel = Label(contactInfo, text="Address: ", font=bold_font)
+    contactaddressLabel.grid(row=7, column=0, padx=20)
 
-    addressEntry = Entry(contactInfo, width=60, font=size_entry)
-    addressEntry.grid(row=7, column=1, columnspan= 2, padx=20)
+    contactaddressEntry = Entry(contactInfo, width=60, font=size_entry)
+    contactaddressEntry.grid(row=7, column=1, columnspan= 2, padx=20)
 
     #RELATIONSHIP
-    rsLabel = Label(contactInfo, text="Relationship: ", font=bold_font)
-    rsLabel.grid(row=8, column=0, padx=20)
+    contactrsLabel = Label(contactInfo, text="Relationship: ", font=bold_font)
+    contactrsLabel.grid(row=8, column=0, padx=20)
 
-    addressEntry = Entry(contactInfo, width=60, font=size_entry)
-    addressEntry.grid(row=8, column=1, columnspan= 2, padx=20)
+    contactaddressEntry = Entry(contactInfo, width=60, font=size_entry)
+    contactaddressEntry.grid(row=8, column=1, columnspan= 2, padx=20)
 
 
     for widget in contactInfo.winfo_children():
@@ -238,7 +226,7 @@ def add_entry():
 
 
     ########DATE AND SIG############
-    lastInfo = LabelFrame(entries, font=bold_font)
+    lastInfo = LabelFrame(add_window, font=bold_font)
     lastInfo.pack()
 
     dateLabel = Label(lastInfo, text="Date: ", font=bold_font)
@@ -272,36 +260,60 @@ def add_entry():
             widget.grid_configure(padx=32, pady=10)
 
 
-    saveButton = Button(entries, text = "Save", command=add_entry)
-    saveButton.pack()
+    ########SAVE AND BACK############
+    buttonInfo = LabelFrame(add_window, font=bold_font)
+    buttonInfo.pack()
+
+    saveButton = Button(buttonInfo, text = "Save", command=save_entry)
+    saveButton.grid(row=11, column=1)
+
+    backButton = Button(buttonInfo, text = "Back", command=add_window.destroy)
+    backButton.grid(row=11, column=2)
 
 
 
-# # Function to search for entry
-# def search_entry():
-#     def search():
-#         search_term = add_entry.get()
-#         results.delete(1.0, END)
 
-#         with open("contacts.txt", "r") as file:
-#             for line in file:
-#                 name, phone, date = line.strip().split(",")
-#                 if search_term.lower() in name.lower():
-#                     results.insert(END, f"Name: {name}\tPhone: {phone}\tDate: {date}\n")
 
-#     search_window = Toplevel(root)
-#     search_window.title("Search Entry")
 
-#     label_search = Label(search_window, text="Search:")
-#     label_search.grid(row=0, column=0)
-#     entry_search = Entry(search_window)
-#     entry_search.grid(row=0, column=1)
 
-#     search_button = Button(search_window, text="Search", command=search)
-#     search_button.grid(row=0, column=2)
 
-#     results = Text(search_window, width=50, height=10)
-#     results.grid(row=1, column=0, columnspan=3)
+
+
+
+# Function to search for an entry
+def search_entry():
+    def search():
+        search_term = searchEntry.get()
+        results.delete(1.0, END)
+
+        with open("saved infos.csv", "r") as file:
+            for line in file:
+                first_name, last_name, phone, email, address = line.strip().split(",")
+                if search_term.lower() in first_name.lower():
+                    results.insert(END, f" {first_name} {last_name}\n{phone}\n{email}\n{address}\n")
+
+
+    search_window = Toplevel(entries)
+    search_window.title("Search Entry")
+
+
+    searchInfo = LabelFrame(search_window, font=bold_font)
+    searchInfo.pack()
+
+    searchLabel = Label(searchInfo, text="Search Name:", font=bold_font)
+    searchLabel.grid(row=0, column=0, padx=20, pady=20)
+    searchEntry = Entry(searchInfo, width=50, font=size_entry)
+    searchEntry.grid(row=0, column=1, padx=20, pady=20)
+
+    searchButt = Button(searchInfo, text="Search", command=search)
+    searchButt.grid(row=0, column=2, padx=20, pady=20)
+
+    results = Text(searchInfo, width=70, height=10, font=size_entry)
+    results.grid(row=1, column=0, columnspan=3, padx=20, pady=20)
+
+    backButton = Button(searchInfo, text = "Back", command=search_window.destroy)
+    backButton.grid(row=3, column=1)
+
 
 
 
@@ -311,8 +323,9 @@ def add_entry():
 
 addButton = Button(entries, text = "Add Entry", command=add_entry)
 addButton.pack()
-searchButton = Button(entries, text="Search Entry")
+searchButton = Button(entries, text="Search Entry", command=search_entry)
 searchButton.pack()
+
 
 
 entries.geometry("1000x1000")
