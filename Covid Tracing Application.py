@@ -41,9 +41,9 @@ def add_entry():
 
         if first_name and last_name and phone and email and address:
             with open("saved infos.csv", "a") as file:
-                file.write(f"Name:{first_name}, Last Name: {last_name}, Phone Number: {phone}, Email: {email}, Address: {address}\n")
+                file.write(f"{first_name}:{last_name}:{phone}:{email}:{address}\n")
             messagebox.showinfo("Success", "Entry added successfully.")
-            entries.destroy()
+            return entries.mainloop()
         else:
             messagebox.showerror("Error", "Please fill in all the fields.")
 
@@ -52,7 +52,8 @@ def add_entry():
     add_window.geometry("1000x1000")
     add_window['background']='#c8c9c9'
 
-    
+
+
 
 
     #USERINFO
@@ -286,7 +287,7 @@ def add_entry():
     dayCombobox = ttk.Combobox(lastInfo,  values=["1", "2", "3", "4", "5", "6","7","8", "9", "10", "11", "12", "13", "14", "15","16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"])
     dayCombobox.grid(row=9, column=2, padx=20)
 
-    yearCombobox = ttk.Combobox(lastInfo,  values=["1980", "1981", "1982","1983", "1984", "1985", "1986","1987","1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995","1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006"])
+    yearCombobox = ttk.Combobox(lastInfo,  values=["2021", "2022", "2023", "2024", "2025", "2026"])
     yearCombobox.grid(row=9, column=3, padx=20)
 
     monthLabel = Label(lastInfo, text="Month", font=italic_font)
@@ -344,13 +345,14 @@ def search_entry():
 
         with open("saved infos.csv", "r") as file:
             for line in file:
-                first_name, last_name, phone, email, address = line.strip().split(",")
+                first_name, last_name, phone, email, address = line.strip().split(":")
                 if search_term.lower() in first_name.lower():
-                    results.insert(END, f" {first_name} {last_name}\n{phone}\n{email}\n{address}\n")
+                    results.insert(END, f" Name: {first_name} {last_name}\n Phone Number: {phone}\n Email: {email}\n Address: {address}\n")
 
 
     search_window = Toplevel(entries)
     search_window.title("Search Entry")
+    search_window.geometry("1000x1000")
     search_window['background']='#c8c9c9'
 
 
