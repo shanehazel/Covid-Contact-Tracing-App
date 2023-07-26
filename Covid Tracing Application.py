@@ -18,7 +18,7 @@ title_font1 = ("Century Gothic", 15, "bold")
 message_font = ("Century Gothic", 10)
 
 
-#RADIOBUTTON
+#RADIOBUTTONS
 butt1 = IntVar()
 butt2 = IntVar()
 butt3 = IntVar()
@@ -29,7 +29,7 @@ butt6 = IntVar()
 
 
 
-# Function to add new entry
+# FUNCTION TO ADD ENTRY
 def add_entry():
     def save_entry():
         first_name = firstEntry.get()
@@ -126,7 +126,9 @@ def add_entry():
 
     for widget in userInfo.winfo_children():
             widget.grid_configure(padx=66, pady=2)
-    
+
+
+
 
 
     ########SURVEY INFO############
@@ -217,7 +219,6 @@ def add_entry():
 
 
 
-
     ########EMERGENCY CONTACT INFO############
     contactInfo = LabelFrame(add_window, text="Emergency Contact Information", font=bold_font)
     contactInfo.pack()
@@ -268,6 +269,8 @@ def add_entry():
 
 
 
+
+
     ########DATE AND SIG############
     lastInfo = LabelFrame(add_window, font=bold_font)
     lastInfo.pack()
@@ -310,6 +313,9 @@ def add_entry():
             widget.grid_configure(padx=30.4)
 
 
+
+
+
     ########SAVE AND BACK############
     buttonInfo = LabelFrame(add_window, font=bold_font)
     buttonInfo.pack()
@@ -330,7 +336,7 @@ def add_entry():
 
 
 
-# Function to search for an entry
+# FUNCTION TO SEARCH ENTRY
 def search_entry():
     def search():
         search_term = searchEntry.get()
@@ -367,10 +373,7 @@ def search_entry():
     backButton = Button(searchInfo, text = "Back", fg="white", bg="red", font="time 10 bold", command=search_window.destroy)
     backButton.grid(row=3, column=1)
 
-
-
-
-
+#FIRST WIDGETS IN OPENING THE APP
 titleLabel = Label(entries, text="Contact Tracing", font=title_font)
 titleLabel.grid(padx=50, pady=20)
 titleLabel['background']='#c8c9c9'
@@ -401,6 +404,9 @@ title3Label['background']='#c8c9c9'
 
 searchButton = Button(entries, text="Search Entry", fg="white", bg="green", font="time 10 bold", width=10, height=2, command=search_entry)
 searchButton.grid(padx=50, pady=20)
+
+
+
 
 
 entries['background']='#c8c9c9'
